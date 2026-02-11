@@ -417,7 +417,7 @@
         {
           \ifbool{isstart}
             {
-              \setbool{istart}{false} 
+              \setbool{isstart}{false} 
             }
             {\@headersocialsep}
           \href{mailto:\@email}{\faEnvelope\ \@email}

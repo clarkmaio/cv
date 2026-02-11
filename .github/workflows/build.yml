@@ -9,6 +9,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -27,3 +29,15 @@ jobs:
         with:
           name: resume
           path: resume.pdf
+
+      - name: Commit and push PDF
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add resume.pdf
+          if git diff --staged --quiet; then
+            echo "No changes in resume.pdf"
+          else
+            git commit -m "update resume.pdf"
+            git push
+          fi
